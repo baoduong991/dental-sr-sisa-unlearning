@@ -37,25 +37,74 @@ We use the **Mendeley Panoramic Dental X-ray Dataset (Version 3)**:
   
 Website to the [original dataset](https://data.mendeley.com/datasets/73n3kz2k4k/3) (Accessed on 25 April 2026)
 
-## 📊 Evaluation Metrics
+# ⚙️ Training Configuration
 
-### Image Quality
-- PSNR  
-- SSIM  
-- LPIPS  
-- Edge Similarity  
+### Super-Resolution Model
 
-### Classification
-- Accuracy  
-- F1-score  
-
-### Unlearning
-- Retraining time  
-- Performance retention  
+| Parameter            | Value |
+|----------------------|-------|
+| Model                | Lightweight ESRGAN-style (Residual CNN) |
+| Input                | Low-resolution dental X-ray |
+| Output               | Super-resolved image |
+| Scale Factor         | ×4 |
+| Loss Function        | L1 Loss |
+| Optimizer            | Adam |
+| Learning Rate        | 1e-4 |
+| Batch Size           | 4 |
+| Number of Epochs     | 5–10 |
+| Activation           | ReLU |
+| Upsampling           | Nearest Neighbor + Convolution |
+| Framework            | PyTorch |
 
 ---
 
-## Results
+### Classification Model
+
+| Parameter            | Value |
+|----------------------|-------|
+| Model                | Logistic Regression |
+| Input Size           | 64 × 64 |
+| Feature              | Flatten grayscale |
+| Evaluation Metrics   | Accuracy, Macro-F1 |
+| Framework            | Scikit-learn |
+
+---
+
+### SISA Unlearning Configuration
+
+| Parameter            | Value |
+|----------------------|-------|
+| Unlearning Type      | Class-level |
+| Number of Shards     | 3 |
+| Shard Strategy       | Tooth-type grouping |
+| Retraining Scope     | Affected shard only |
+| Aggregation          | Majority Voting / Probability Averaging |
+
+---
+
+### 📊 Evaluation Metrics
+
+| Category             | Metrics |
+|----------------------|--------|
+| Image Quality        | PSNR, SSIM |
+| Perceptual Quality   | LPIPS |
+| Structural Fidelity  | Edge Similarity |
+| Classification       | Accuracy, Macro-F1 |
+| Unlearning           | Retraining Time, Performance Retention |
+
+---
+
+### Environment
+
+| Parameter            | Value |
+|----------------------|-------|
+| GPU Environment      | Kaggle / Google Colab |
+| GPU Type             | NVIDIA T4 / P100 |
+| VRAM                 | 16 GB |
+| Frameworks           | PyTorch, OpenCV, Scikit-learn |
+| Python Version       | 3.9 |
+
+### Results
 
 | Task | Metric | Result |
 |------|--------|--------|
@@ -66,14 +115,14 @@ Website to the [original dataset](https://data.mendeley.com/datasets/73n3kz2k4k/
 
 ---
 
-## Installation
+### Installation
 <pre><code>
 git clone https://github.com/your-username/dental-sr-sisa-unlearning.git
 cd dental-sr-sisa-unlearning
 pip install -r requirements.txt
 </code></pre>
 
-## Usage
+### Usage
 Run the following command:
 <pre><code>
 python evaluate.py \
