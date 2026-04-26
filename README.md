@@ -98,8 +98,8 @@ Website to the [original dataset](https://data.mendeley.com/datasets/73n3kz2k4k/
 
 | Parameter            | Value |
 |----------------------|-------|
-| GPU Environment      | Kaggle / Google Colab |
-| GPU Type             | NVIDIA T4 / P100 |
+| GPU Environment      | Google Colab |
+| GPU Type             | NVIDIA T4 |
 | VRAM                 | 16 GB |
 | Frameworks           | PyTorch, OpenCV, Scikit-learn |
 | Python Version       | 3.9 |
