@@ -16,6 +16,14 @@ This project addresses both challenges through a unified pipeline:
 
 ---
 
+## Proposed architectures
+
+### Architecture of ESRGAN network
+![Biểu đồ kết quả](architecture/ESRGAN_architecture.png)
+
+### The proposed method of the SISA-based unlearning
+![Biểu đồ kết quả](architecture/Proposed_method_of_the_SISA-based_unlearning.png)
+
 ## Pipeline
 High-Resolution Images (Subset 3)
 ↓
